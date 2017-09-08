@@ -6,9 +6,9 @@ faceDetector = vision.CascadeObjectDetector();
 
 
 %%%%%%%%%%%%%%%%%%% Read a frame from the video %%%%%%%%%%%%%%%%%%%%%%%%%%%
-vid = VideoReader('sir.webm');
+vid = VideoReader('../indiahacks3.avi');
 nframes=vid.NumberOfFrames;
-videoFrame = read(vid,1);
+videoFrame = read(vid,10);
 BB = step(faceDetector, videoFrame);
 
 
@@ -20,7 +20,7 @@ videoOut = insertObjectAnnotation(videoFrame,'rectangle',BB,'Face');
 BB3 = [BB(1)-(1/2*BB(3)),BB(2)+(3/2*BB(4)),2*BB(3),2*BB(4)];
 videoOut = insertObjectAnnotation(videoFrame,'rectangle',BB3,'Chest'); imshow(videoOut), title('Detected Chest');
 
-for i=1:nframes
+for i=10:nframes
  frame = read(vid, i);
  grayImage = rgb2gray(frame);
  ROI =imcrop(grayImage,BB3);
